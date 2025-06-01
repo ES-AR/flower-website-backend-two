@@ -6,7 +6,7 @@ const createToken = (id) => {
 }
 
 const loginUser = async (req, res) => {
-    res.json({mssg: "Login user"})
+    res.json({mssg: "Login-user"})
 }
 
 const signupUser = async (req, res) => {
@@ -14,7 +14,7 @@ const signupUser = async (req, res) => {
 try {
     const user = await User.signUp(Email, Password)
 
-    // create a token
+    // create a user token
     const token = createToken(user.id)
 
     res.status(200).json({ Email, token })
