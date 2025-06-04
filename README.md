@@ -13,37 +13,54 @@
 - License
 
 ## Overview
-The Flower Website Backend is a Node.js and Express.js-powered RESTful API designed to manage flowers in an online flower shop. This backend provides functionalities to create, read, update, and delete flower entries along with image uploads and category management.
+The Flower Website Backend is a complete API server to manage an online flower shop's products and users. It includes:
+
+- Full CRUD operations on flower entries
+- Image upload support
+- Category tagging
+- Secure user registration and login
+- Validation and error handling
 
 ## Features
-- RESTful API for managing flowers
-- Image upload support using `multer`
-- MongoDB database integration with Mongoose
-- CRUD operations for flowers (Create, Read, Update, Delete)
-- Category support for flower classification
-- Middleware for request logging and error handling
+-  RESTful API with Express
+-  MongoDB integration using Mongoose
+-  Flower CRUD (Create, Read, Update, Delete)
+-  Image upload via `multer`
+-  User authentication with hashed passwords
+-  Strong password & email validation
+-  Error handling middleware
+-  Environment configuration using `dotenv`
 
 ## Presentation Link
-[Presentation Link](https://www.loom.com/share/0c90173bff494f06958ad9cee339cd2a?sid=73c09f61-b6b9-4d57-80fd-57dae154f2ea)
+[Presentation Link]()
 
 ## Live Demo
-[Live Demo](https://flower-website-backend.onrender.com)
+[Live Demo]()
 
 ## Technologies Used
 - Node.js
 - Express.js
-- MongoDB & Mongoose
-- Multer (for image uploads)
-- dotenv (for environment configuration)
+- MongoDB + Mongoose
+- Multer (image uploads)
+- Bcrypt (password hashing)
+- Validator (email & password validation)
+- Dotenv (environment variables)
 
 ## API Endpoints
   The API will be running on `http://localhost:5000`
-  
-- GET /api/flowers - Retrieve all flowers
-- GET /api/flowers/:id - Retrieve a specific flower by ID
-- POST /api/flowers - Add a new flower (with image upload)
-- PATCH /api/flowers/:id - Update a flower's details
-- DELETE /api/flowers/:id - Delete a flower and its associated image
+
+###  Auth
+- POST /api/users/signup — Register a new user  
+- POST /api/users/login — Log in existing user
+- GET /api/users/getusers — Shows all the registered users
+
+
+###  Flowers
+- GET /api/flowers — Get all flowers  
+- GET /api/flowers/:id — Get a flower by ID  
+- POST /api/flowers — Create a new flower (image upload supported)  
+- PATCH /api/flowers/:id — Update a flower  
+- DELETE /api/flowers/:id — Delete a flower  
 
 ## Installation and Setup
 
