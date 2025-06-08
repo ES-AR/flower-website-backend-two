@@ -14,8 +14,7 @@ const cors = require('cors');
 
 app.use(cors({
   origin: [
-    'http://localhost:3000',
-    'https://.onrender.com' 
+    'http://localhost:3000'
   ]
 }));
 
