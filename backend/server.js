@@ -1,6 +1,6 @@
 const express = require('express');
 const flowersRouter = require('./routes/flowers'); 
-const userRouter = require('./routes/users');
+const userRouter = require('./routes/users')
 const mongoose = require('mongoose');
 const path = require('path');
 require('dotenv').config();
@@ -14,7 +14,7 @@ const cors = require('cors');
 
 app.use(cors({
   origin: [
-    'http://localhost:',
+    'http://localhost:3000',
     'https://.onrender.com' 
   ]
 }));
