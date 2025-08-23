@@ -13,9 +13,9 @@ const cors = require('cors');
 // cors permission to GET request from multiple environments
 
 app.use(cors({
-  origin: [
-    'http://localhost:3000'
-  ]
+  origin: "*",
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
