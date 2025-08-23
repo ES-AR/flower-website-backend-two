@@ -85,7 +85,7 @@ const Flowers = () => {
         <footer className="footer">
           Flower Delivery App <br />
           Created for ElevateHER Innovation Space Ltd <br />
-          By [Full Name of Student]
+          By [Sadiq Ridwan Abubakar]
         </footer>
       </div>
     </div>

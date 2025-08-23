@@ -1,4 +1,4 @@
-# Flower Website Backend
+# Flower Website Backend (Backend + Admin Panel)
 
 ## Table of Contents
 - Overview
@@ -8,17 +8,19 @@
 - Technologies Used
 - API Endpoints
 - Installation and Setup
+- Deployment
 - Environment Variables
 - Author
 - License
 
 ## Overview
-The Flower Website Backend is a complete API server to manage an online flower shop's products and users. It includes:
+The Flower Delivery Website is a full-stack application that combines a backend API with an admin panel frontend to manage an online flower shop's products and users.
 
 - Full CRUD operations on flower entries
 - Image upload support
 - Category tagging
 - Secure user registration and login
+- Admin panel for managing flowers
 - Validation and error handling
 
 ## Features
@@ -27,12 +29,13 @@ The Flower Website Backend is a complete API server to manage an online flower s
 -  Flower CRUD (Create, Read, Update, Delete)
 -  Image upload via `multer`
 -  User authentication with hashed passwords
--  Strong password & email validation
+- Admin Panel (React + Vite) for managing flowers
+- Toast notifications for actions (add/delete)
 -  Error handling middleware
 -  Environment configuration using `dotenv`
 
 ## Presentation Link
-[Presentation Link](https://www.loom.com/share/d7d6294fb7724bd790acaf80553abe92?sid=4616d532-942a-4b3f-b782-026f85ef8de1)
+[Presentation Link]()
 
 ## Live Demo
 [Live Demo](https://flower-website-backend-two-2ddp.onrender.com/api/users/getusers)
@@ -45,6 +48,8 @@ The Flower Website Backend is a complete API server to manage an online flower s
 - Bcrypt (password hashing)
 - Validator (email & password validation)
 - Dotenv (environment variables)
+- Admin Panel (React + Vite) for managing flowers
+- Toast notifications for actions (add/delete)
 
 ## API Endpoints
   The API will be running on `http://localhost:5000`
@@ -65,15 +70,20 @@ The Flower Website Backend is a complete API server to manage an online flower s
 ## Installation and Setup
 
 1. **Clone the repository:**
-
+  `git clone https://github.com/your-username/flower-website-backend-two.git`
+  `cd flower-website-backend-two`
 2. **Install dependencies:**
-
+  `cd backend`
+  `npm install`
+  `npm start`
 3. **Set up the environment variables:**
-   PORT=5000
-   MONGO_URI=mongodb+srv://user:user123@cluster0.gfprrfl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+   `PORT=5000`
+   `MONGO_URI=your-mongodb-connection-uri`
 
 
 4. **Start the server:**
+  In admin folder `npm run dev`
+  In backend folder `npm start`
 
 ## Environment Variables
 Ensure you configure the `.env` file with the correct MongoDB connection string and port.
