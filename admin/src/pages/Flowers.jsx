@@ -13,7 +13,7 @@ const Flowers = () => {
 
   const fetchFlowers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/flowers");
+      const res = await axios.get("https://flower-website-backend-two-2ddp.onrender.com/api/flowers");
       setFlowers(res.data);
     } catch (err) {
       console.error("Fetch flowers error:", err);
@@ -24,7 +24,7 @@ const Flowers = () => {
   const deleteFlower = async (id) => {
     if (!window.confirm("Are you sure you want to delete this flower?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/flowers/${id}`);
+      await axios.delete(`https://flower-website-backend-two-2ddp.onrender.com/api/flowers/${id}`);
       toast.success("Flower deleted successfully!");
       setFlowers(flowers.filter((f) => f._id !== id));
     } catch (err) {

@@ -24,7 +24,7 @@ const AddFlower = () => {
     if (image) data.append("Image", image);
 
     try {
-      await axios.post("http://localhost:5000/api/flowers", data, {
+      await axios.post("https://flower-website-backend-two-2ddp.onrender.com/api/flowers", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Flower added successfully!");
