@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-//Configure Multer for file uploads
+// Configure Multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -15,17 +15,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-//Get all flowers
+// Get all flowers
 const getFlowers = async (req, res) => {
     try {
         const flowers = await Flower.find({}).sort({ createdAt: -1 });
         res.status(200).json(flowers);
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        console.error("Error fetching flowers:", error);
+        res.status(500).json({ error: 'Server error fetching flowers' });
     }
 };
 
-//Get a single flower by ID
+// Get a single flower by ID
 const getFlower = async (req, res) => {
     const { id } = req.params;
     try {
@@ -35,11 +36,12 @@ const getFlower = async (req, res) => {
         }
         res.status(200).json(flower);
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        console.error("Error fetching flower:", error);
+        res.status(500).json({ error: 'Server error fetching flower' });
     }
 };
 
-//Create a new flower with image upload
+// Create a new flower with image upload
 const createFlower = async (req, res) => {
     console.log("Request body:", req.body);
     console.log("Uploaded file:", req.file);
@@ -48,28 +50,38 @@ const createFlower = async (req, res) => {
     const Image = req.file ? `/uploads/${req.file.filename}` : null;
 
     try {
-        const flower = await Flower.create({ Title, Description, Price, Image, Category });
+        if (!Image) {
+            return res.status(400).json({ error: "Image is required" });
+        }
+
+        const flower = await Flower.create({
+            Title,
+            Description,
+            Price: Number(Price),  // ✅ ensure numeric
+            Image,
+            Category
+        });
+
         res.status(201).json(flower);
     } catch (error) {
+        console.error("Error creating flower:", error.message);
         res.status(400).json({ error: error.message });
     }
 };
 
+// Delete a flower
 const deleteFlower = async (req, res) => {
     const { id } = req.params;
 
     try {
-        // Find the flower in the database
         const flower = await Flower.findById(id);
         if (!flower) {
             return res.status(404).json({ error: 'Flower not found' });
         }
 
-        //Check if the flower has an image
+        // Delete image if exists
         if (flower.Image) {
             const imagePath = path.join(__dirname, '../', flower.Image);
-
-            //Delete the image file
             fs.unlink(imagePath, (err) => {
                 if (err) {
                     console.error('Error deleting image:', err);
@@ -79,33 +91,31 @@ const deleteFlower = async (req, res) => {
             });
         }
 
-        //Delete the flower from the database
         await Flower.findByIdAndDelete(id);
         res.status(200).json({ message: 'Flower deleted successfully' });
 
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        console.error("Error deleting flower:", error);
+        res.status(500).json({ error: 'Server error deleting flower' });
     }
 };
 
-
+// Update a flower
 const updateFlower = async (req, res) => {
     const { id } = req.params;
     const { Title, Description, Price, Category } = req.body;
     let newImagePath = null;
 
     try {
-        // Find the existing flower
         const flower = await Flower.findById(id);
         if (!flower) {
             return res.status(404).json({ error: 'Flower not found' });
         }
 
-        //If a new image is uploaded, replace the old one
+        // Replace image if new one is uploaded
         if (req.file) {
             newImagePath = `/uploads/${req.file.filename}`;
 
-            //Delete old image if it exists
             if (flower.Image) {
                 const oldImagePath = path.join(__dirname, '../', flower.Image);
                 fs.unlink(oldImagePath, (err) => {
@@ -118,13 +128,12 @@ const updateFlower = async (req, res) => {
             }
         }
 
-        //Update flower details
         const updatedFlower = await Flower.findByIdAndUpdate(
             id,
             {
                 Title: Title || flower.Title,
                 Description: Description || flower.Description,
-                Price: Price || flower.Price,
+                Price: Price ? Number(Price) : flower.Price, // ✅ ensure numeric
                 Category: Category || flower.Category,
                 Image: newImagePath || flower.Image
             },
@@ -134,11 +143,10 @@ const updateFlower = async (req, res) => {
         res.status(200).json(updatedFlower);
 
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        console.error("Error updating flower:", error);
+        res.status(500).json({ error: 'Server error updating flower' });
     }
 };
-
-
 
 module.exports = {
     getFlowers,
