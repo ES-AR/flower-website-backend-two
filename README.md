@@ -38,7 +38,7 @@ The Flower Delivery Website is a full-stack application that combines a backend 
 [Presentation Link](https://www.loom.com/share/d7d6294fb7724bd790acaf80553abe92?sid=4616d532-942a-4b3f-b782-026f85ef8de1)
 
 ## Live Demo
-[Live Demo](https://admin-panel-fg0n.onrender.com)
+[Live Demo](https://admin-panel-fg0n.onrender.com/add-flower)
 
 ## Technologies Used
 - Node.js
